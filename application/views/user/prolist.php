@@ -11,8 +11,9 @@
 <?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
 <!-- Custom styles for this template-->
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
 
 
   </head>
@@ -76,6 +77,20 @@
       ?>
     </div>
   </div>
+
+
+  <?php echo form_open("user/Product/searchUser" , ['class' => 'form-inline']); ?>
+            <div class="form-group">
+
+              <input type="text" class="form-control" id="searchuser" name="search" placeholder="Type a name">
+            </div>
+            <button type="submit" name="searchBtn" class="btn btn-primary submit">Search</button>
+            <!-- <button class="btn btn-default more" href="<?php echo site_url('user/Product') ?>">Refresh</button> -->
+        <?php echo form_close(); ?>
+        <?php echo '<h3 style="color: #26324E;">'.$message.'</h3>';?>
+
+
+
   <div class="row">
     <div class="col-md-12">
       <div class="row">
@@ -150,7 +165,12 @@
     </div>
   </div>  
 </div>
-          
+  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
 <script>
     $(".remove").click(function(){
 

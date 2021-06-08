@@ -16,22 +16,65 @@
      function index()
      {     
         $config = array();
-        $config["base_url"] = base_url() . 'user/Product/';
+        $config["base_url"] = base_url() . 'index.php/user/Product/index/';
         $config["total_rows"] = $this->Productmodel->get_count();
-        $config["per_page"] = 2;
+        $config["per_page"] = 5;
         $config["uri_segment"] = 3;
-        print_r($config);
+        // print_r($config);
 
-      $this->pagination->initialize($config);
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['attributes'] = array('class' => 'page_link');
+        $config['first_link'] = 'First';
+        $config['last_link'] = 'Last';
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a href="#" class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></a></li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+
+
         $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
-    
+      $this->pagination->initialize($config);
         $data["links"] = $this->pagination->create_links();
-
+        $data['message'] = '';
         $data['products'] = $this->Productmodel->all($config["per_page"], $page);
+        
+        $data['records'] = $this->Productmodel->all($config['per_page'], $page);
+
+        $key = $this->input->post('search');
 
 
          $this->load->view('user/prolist',$data);
      }
+
+     public function searchUser() 
+     {
+        
+        $key = $this->input->post('search');
+
+        if(isset($key) and !empty($key)){
+            $data['search'] = $this->Productmodel->searchRecord($key);
+            $data['link'] = '';
+            $data['message'] = 'Search Results';
+            $data["links"] = $this->pagination->create_links();
+            $this->load->view('user/prolist', $data);
+        }
+        else {
+            redirect('user/Product') ;
+        }
+    }
+
+
       
       public function getSubcategory() 
       {
