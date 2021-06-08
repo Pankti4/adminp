@@ -12,6 +12,9 @@
 <!-- Custom styles for this template-->
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
   </head>
 
   <body id="page-top">
@@ -101,25 +104,31 @@
           <th width="100">Delete</th>
         </tr>
         
-        <?php if(!empty($products)) { foreach($products as $products) { 
-          if($products->status == 1) { $status = 'Active'; } else { $status = 'InActive';}
+        <?php 
+          if(!empty($products)) 
+          { 
+            //echo '<pre>';print_r($products);
+            foreach($products as $pr) 
+            { 
+               
+           if($pr['status'] == 1) { $status = 'Active'; } else { $status = 'InActive';}
           ?>
         <tr>
-          <td><?php echo $products->catname;?></td>
-          <td><?php echo $products->subcatname;?></td>
-          <td><?php echo $products->name;?></td>
+          <td><?php echo $pr['catname'];?></td>
+          <td><?php echo $pr['subcatname'];?></td>
+          <td><?php echo $pr['name'];?></td>
           <td><strong><?php echo $status; ?></strong></td>
 
           <td>
-            <a href="<?php echo base_url().'user/Productimage/create/'.$products->id?>" class="btn btn-primary">Image</a>
+            <a href="<?php echo base_url().'user/Productimage/create/'.$pr['id']?>" class="btn btn-primary">Image</a>
           </td>
 
           <td>
-            <a href="<?php echo base_url().'user/Product/edit/'.$products->id?>" class="btn btn-primary">Edit</a>
+            <a href="<?php echo base_url().'user/Product/edit/'.$pr['id']?>" class="btn btn-primary">Edit</a>
           </td>
 
           <td>
-            <a href="<?php echo base_url().'user/Product/delete/'.$products->id?>" class="btn btn-danger remove">Delete</a>
+            <a href="<?php echo base_url().'user/Product/delete/'.$pr['id']?>" class="btn btn-danger remove">Delete</a>
           </td>
 
         </tr>
@@ -132,7 +141,11 @@
 
       </table>
 
-      <p><?php echo $links; ?></p>
+      <!-- <div class="pagination">
+      <?php echo $this->pagination->create_links(); ?> 
+      </div> --> 
+      
+      <p><?php echo $links; ?></p> 
 
     </div>
   </div>  
@@ -144,7 +157,7 @@
         var id = $(this).parents("tr").attr("id");
 
 
-        if(confirm('Are you sure to remove this State ?'))
+        if(confirm('Are you sure to remove this PRoduct ?'))
 
         {
 

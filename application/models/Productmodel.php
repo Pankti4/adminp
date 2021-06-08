@@ -12,14 +12,6 @@ class Productmodel extends CI_Model
         return $this->db->count_all("products");
     }
 
-    public function get_data($limit, $start) 
-    {
-        $this->db->limit($limit, $start);
-        $query = $this->db->get("products");
-        return $query->result();
-    }
-
-
 
      function create($formArray)
     {    
@@ -49,14 +41,15 @@ class Productmodel extends CI_Model
     }
 
 
-    function all() 
+    function all($limit, $start) 
     {
+        $this->db->limit($limit, $start);
         $this->db->select('products.*,categories.name as catname,subcategories.name as subcatname');
         $this->db->from('products');
         $this->db->join('categories','categories.id=products.category_id','left');
         $this->db->join('subcategories','subcategories.id=products.subcategory_id','left');
         $result = $this->db->get();
-        return $result;
+        return $result->result_array();
 
     }
 

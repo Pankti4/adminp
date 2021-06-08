@@ -8,53 +8,30 @@
 
            $this->load->helper('url','form');
           $this->load->library("pagination");
-
+          // $this->perPage = 10;
            $this->load->model('Productmodel');
        }
 
    
      function index()
-     {   
-         $products = $this->Productmodel->all();
-         $data['products'] = $products->result();
-         $config = array();
-        $config["base_url"] = base_url() . "index.php/user/Product/index";
-        $config["total_rows"] = $this->Productmodel->get_count();
-        $config["per_page"] = 10;
-        $config["uri_segment"] = 3;
-
-        $this->pagination->initialize($config);
-
-    
-        $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
-         $data["links"] = $this->pagination->create_links();
-         $data['products'] = $this->Productmodel->get_data($config["per_page"], $page);
-
-         $this->load->view('user/prolist',$data);
-     }
-
-     function pagination()
-     {
-        $products = $this->Productmodel->all();
-        $data['products'] = $products->result();
+     {     
         $config = array();
-        $config["base_url"] = base_url() . "index.php/user/Product/index";
+        $config["base_url"] = base_url() . 'user/Product/';
         $config["total_rows"] = $this->Productmodel->get_count();
-        $config["per_page"] = 10;
+        $config["per_page"] = 2;
         $config["uri_segment"] = 3;
+        print_r($config);
 
-        $this->pagination->initialize($config);
-
-    
+      $this->pagination->initialize($config);
         $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
     
         $data["links"] = $this->pagination->create_links();
 
-        $data['products'] = $this->Productmodel->get_data($config["per_page"], $page);
+        $data['products'] = $this->Productmodel->all($config["per_page"], $page);
 
-        $this->load->view('user/prolist',$data);
+
+         $this->load->view('user/prolist',$data);
      }
-
       
       public function getSubcategory() 
       {
