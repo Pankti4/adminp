@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 31, 2021 at 07:35 PM
+-- Generation Time: Jul 02, 2021 at 07:35 PM
 -- Server version: 5.7.34-0ubuntu0.18.04.1
--- PHP Version: 7.3.28-1+ubuntu18.04.1+deb.sury.org+1
+-- PHP Version: 7.2.24-0ubuntu0.18.04.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,7 +42,14 @@ INSERT INTO `categories` (`id`, `name`, `status`, `created`, `updated`) VALUES
 (1, 'Dairy Product', '1', '2021-05-12 11:02:14', '0000-00-00 00:00:00'),
 (2, 'Beverages', '1', '2021-05-12 11:01:36', '0000-00-00 00:00:00'),
 (4, 'Baking Goods', '1', '2021-05-12 14:22:20', '0000-00-00 00:00:00'),
-(9, 'vegetable', '0', '2021-05-31 13:18:32', '2021-05-31 13:18:46');
+(9, 'vegetable', '0', '2021-05-31 13:18:32', '2021-05-31 13:18:46'),
+(10, 'Clothes', '1', '2021-07-01 00:00:00', '2021-07-01 00:00:00'),
+(11, 'Prints', '0', '2021-07-01 00:00:00', '2021-07-01 00:00:00'),
+(12, 'days', '1', '2021-06-30 00:00:00', '2021-07-09 00:00:00'),
+(13, 'kite', '0', '2021-06-17 00:00:00', '2021-07-16 00:00:00'),
+(14, 'birds', '1', '2021-06-30 00:00:00', '2021-06-01 00:00:00'),
+(15, 'joe', '0', '2021-07-01 00:00:00', '2021-07-02 00:00:00'),
+(16, 'shoes', '0', '2021-06-11 00:00:00', '2021-07-02 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -106,7 +113,8 @@ INSERT INTO `countries` (`id`, `name`, `status`, `created`, `updated`) VALUES
 (14, 'Japan', '0', '2021-05-20 00:00:00', '0000-00-00 00:00:00'),
 (17, 'AVC', '1', '2021-05-25 00:00:00', '0000-00-00 00:00:00'),
 (18, 'LA', '0', '2021-05-25 00:00:00', '0000-00-00 00:00:00'),
-(20, 'e', '1', '0000-00-00 00:00:00', '2021-05-26 17:47:59');
+(20, 'e', '1', '0000-00-00 00:00:00', '2021-05-26 17:47:59'),
+(22, 'Portu', '1', '2021-07-01 17:54:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -198,6 +206,20 @@ INSERT INTO `pin` (`id`, `pincode`, `ls_cod`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1=Active | 0=Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `productimage`
 --
 
@@ -215,7 +237,8 @@ CREATE TABLE `productimage` (
 --
 
 INSERT INTO `productimage` (`id`, `product_id`, `imagename`, `created`, `updated`, `status`) VALUES
-(1, 2, 'hiii', '2021-05-31 18:47:56', '0000-00-00 00:00:00', '1');
+(1, 2, 'hiii', '2021-05-31 18:47:56', '0000-00-00 00:00:00', '1'),
+(2, 6, 'Screenshot from 2021-06-30 12-27-20.png', '2021-07-02 16:44:36', '0000-00-00 00:00:00', '1');
 
 -- --------------------------------------------------------
 
@@ -239,7 +262,18 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `subcategory_id`, `created`, `updated`, `status`) VALUES
 (2, 'Produ', 2, 6, '2021-05-12 18:31:13', '2021-05-31 11:07:00', '0'),
-(6, 'test1', 1, 1, '2021-05-31 11:06:28', '0000-00-00 00:00:00', '0');
+(6, 'test1', 1, 1, '2021-05-31 11:06:28', '0000-00-00 00:00:00', '0'),
+(7, 'pro', 2, 3, '2021-07-06 00:00:00', '2021-07-16 00:00:00', '1'),
+(8, 'test', 4, 11, '2021-07-17 00:00:00', '2021-07-15 00:00:00', '1'),
+(9, 'pri', 9, 7, '2021-06-30 00:00:00', '2021-07-22 00:00:00', '1'),
+(10, 'data', 1, 1, '2021-06-24 00:00:00', '2021-06-16 00:00:00', '1'),
+(11, 'test3', 2, 2, '2021-06-09 00:00:00', '2021-07-16 00:00:00', '1'),
+(12, 'roi', 1, 1, '2021-07-01 12:00:44', '0000-00-00 00:00:00', '0'),
+(13, 'vegetables', 2, 5, '2021-07-01 12:01:12', '0000-00-00 00:00:00', '0'),
+(14, 'fruits', 1, 3, '2021-07-01 12:01:27', '0000-00-00 00:00:00', '1'),
+(15, 'roti', 1, 1, '2021-07-01 12:01:47', '0000-00-00 00:00:00', '1'),
+(16, 'rice', 4, 7, '2021-07-01 12:02:10', '0000-00-00 00:00:00', '1'),
+(17, 'eat', 1, 1, '2021-07-01 12:02:25', '0000-00-00 00:00:00', '1');
 
 -- --------------------------------------------------------
 
@@ -261,8 +295,8 @@ CREATE TABLE `states` (
 --
 
 INSERT INTO `states` (`id`, `country_id`, `name`, `status`, `created`, `updated`) VALUES
-(1, 18, 'New South Wales', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 12, 'Queenland', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 0, 'New South Wales', '0', '0000-00-00 00:00:00', '2021-07-02 16:36:04'),
+(3, 11, 'Queenland', '0', '0000-00-00 00:00:00', '2021-07-02 16:36:25'),
 (4, 18, 'Bern', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (5, 11, 'Uri', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (6, 12, 'Zug', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -366,7 +400,7 @@ CREATE TABLE `tblusers` (
 
 INSERT INTO `tblusers` (`id`, `firstName`, `lastName`, `emailId`, `mobileNumber`, `userPassword`, `regDate`, `isActive`, `lastUpdationDate`) VALUES
 (4, 'Abc', 'Xyz', 'abc@xyz.com', '1234567908', 'Test@123', '2018-12-25 18:43:33', 1, NULL),
-(5, 'Isha', 'Bhatt', 'isha1@gmail.com', '1234567896', 'Isha@1234', '2021-04-29 08:33:10', 1, '2021-05-11 06:08:02');
+(5, 'P', 'G', 'isha1@gmail.com', '2345678909', 'Isha@123', '2021-04-29 08:33:10', 1, '2021-07-02 11:05:21');
 
 -- --------------------------------------------------------
 
@@ -478,6 +512,12 @@ ALTER TABLE `pin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `productimage`
 --
 ALTER TABLE `productimage`
@@ -542,7 +582,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `cities`
 --
@@ -552,7 +592,7 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `countries`
 --
 ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `gallery`
 --
@@ -574,15 +614,20 @@ ALTER TABLE `notes`
 ALTER TABLE `pin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `productimage`
 --
 ALTER TABLE `productimage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `states`
 --

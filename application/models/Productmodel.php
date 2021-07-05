@@ -1,19 +1,27 @@
 <?php
 class Productmodel extends CI_Model
 {   
+    
     function __construct() 
     {
         $this->subcategories = 'subcategories';
     }
 
 
-    public function get_count() 
+    public function get_count($params="") 
     {
-        $this->db->select("COUNT(*) as num_row");
+        $this->db->select("COUNT(*) as allcount");
         $this->db->from('products');
-        $this->db->order_by('id');
+
+        if($params != '')
+        {
+        $this->db->like('products.name', $params);
+        }
+
         $query = $this->db->get();
-        return $this->db->count_all("products");
+        $result = $query->result_array();
+        
+        return $result[0]['allcount'];
     }
 
 
@@ -29,23 +37,7 @@ class Productmodel extends CI_Model
         return  $result;
     }
 
-    public function searchRecord($data)
-    {
-        $this->db->select('*');
-        $this->db->from('products');
-        $this->db->like('name',$data);
-        // $this->db->or_like('',$key);
-        $this->db->or_like('id',$data);
-        $query = $this->db->get();
-
-        if($query->num_rows()>0){
-          return $query->result();
-        }
-    }
-
-
-
-
+    
     public function setCategoryID($categoryid) 
     {
         return $this->_categoryid = $categoryid;
@@ -62,18 +54,34 @@ class Productmodel extends CI_Model
     }
 
 
-    function all($limit, $start) 
+
+    function all($limit, $start, $params="") 
     {
-        $this->db->limit($limit, $start);
         $this->db->select('products.*,categories.name as catname,subcategories.name as subcatname');
         $this->db->from('products');
         $this->db->join('categories','categories.id=products.category_id','left');
         $this->db->join('subcategories','subcategories.id=products.subcategory_id','left');
-        $this->db->order_by('id');
+
+        if($params != '')
+        {
+        $this->db->like('products.name', $params);
+        }
+
+        
+        $this->db->limit($limit,$start);
+        
         $result = $this->db->get();
+        $str = $this->db->last_query();
+   
+        // echo "<pre>";
+        // print_r($str);
+        // exit;
+
         return $result->result_array();
 
     }
+
+
 
     function getProducts($productsId) 
     {

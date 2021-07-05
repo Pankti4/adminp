@@ -78,17 +78,19 @@
     </div>
   </div>
 
+          <form method="get" action="Product/index">
+                <div class="form-group">
+                    <input type="text" name="searchKeyword" class="form-control" placeholder="Search by Product Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
+                    <div class="input-group-append">
+                        <input type="submit" name="submitSearch" class="btn btn-primary submit" value="Search">
+                        
 
-  <?php echo form_open("user/Product/searchUser" , ['class' => 'form-inline']); ?>
-            <div class="form-group">
+                        <a href="<?php echo base_url(). "index.php/user/Product"; ?>" class="btn btn-primary">Refresh</a>
 
-              <input type="text" class="form-control" id="searchuser" name="search" placeholder="Type a name">
-            </div>
-            <button type="submit" name="searchBtn" class="btn btn-primary submit">Search</button>
-            <!-- <button class="btn btn-default more" href="<?php echo site_url('user/Product') ?>">Refresh</button> -->
-        <?php echo form_close(); ?>
-        <?php echo '<h3 style="color: #26324E;">'.$message.'</h3>';?>
 
+                    </div>
+                </div>
+            </form>
 
 
   <div class="row">
@@ -106,7 +108,9 @@
   
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-striped">
+      <table class="table" id="datatable">
+                    <thead>
+      <!-- <table class="table table-striped"> -->
         <tr>
           <th>Category Name</th>
           <th>SubCategory Name</th>
@@ -118,11 +122,12 @@
           <th width="60">Edit</th>
           <th width="100">Delete</th>
         </tr>
+
         
         <?php 
+
           if(!empty($products)) 
           { 
-            //echo '<pre>';print_r($products);
             foreach($products as $pr) 
             { 
                
@@ -133,7 +138,6 @@
           <td><?php echo $pr['subcatname'];?></td>
           <td><?php echo $pr['name'];?></td>
           <td><strong><?php echo $status; ?></strong></td>
-
           <td>
             <a href="<?php echo base_url().'user/Productimage/create/'.$pr['id']?>" class="btn btn-primary">Image</a>
           </td>
@@ -153,21 +157,57 @@
           <td colspan="5">Products not Found</td>
         </tr>
       <?php } ?>
+                            </thead>
+                      <tbody>
+                      </tbody>
 
       </table>
 
-      <!-- <div class="pagination">
-      <?php echo $this->pagination->create_links(); ?> 
-      </div> --> 
       
-      <p><?php echo $links; ?></p> 
+      <p><?php echo $pagination; ?></p> 
 
     </div>
   </div>  
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
   
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
 
+ load_data();
+
+ function load_data(query)
+ {
+  $.ajax({
+   url:"<?php echo base_url(); ?>Product/fetch",
+   method:"POST",
+   data:{query:query},
+   success:function(data){
+    $('#result').html(data);
+   }
+  })
+ }
+
+ $('#search_text').keyup(function(){
+  var search = $(this).val();
+  if(search != '')
+  {
+   load_data(search);
+  }
+  else
+  {
+   load_data();
+  }
+ });
+});
+</script>
 
 
 
@@ -177,7 +217,7 @@
         var id = $(this).parents("tr").attr("id");
 
 
-        if(confirm('Are you sure to remove this PRoduct ?'))
+        if(confirm('Are you sure to remove this Product ?'))
 
         {
 

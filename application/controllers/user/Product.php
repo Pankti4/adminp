@@ -1,27 +1,32 @@
 <?php
    defined('BASEPATH') OR exit('No direct script access allowed');
-   class Product extends CI_Controller {
+   class Product extends CI_Controller 
+   {
       
      public function __construct() 
      {
-           parent::__construct(false);
+           parent::__construct();
 
            $this->load->helper('url','form');
-          $this->load->library("pagination");
-          // $this->perPage = 10;
+           $this->load->library(array("pagination"));
            $this->load->model('Productmodel');
-       }
+      }
 
-   
-     function index()
-     {     
+        function index()
+        {
         $config = array();
-        $config["base_url"] = base_url() . 'index.php/user/Product/index/';
-        $config["total_rows"] = $this->Productmodel->get_count();
-        $config["per_page"] = 5;
-        $config["uri_segment"] = 3;
-        // print_r($config);
-
+              
+        $config['page_query_string'] = TRUE;
+        $config['enable_query_strings'] = TRUE;
+        $config['page_query_string'] = TRUE;
+        $config['reuse_query_string'] = FALSE;
+        $config['prefix'] = '';
+        $config['suffix'] = '';
+        $config['use_global_url_suffix'] = FALSE;
+        $config['full_tag_open'] = '<p>';
+        $config['full_tag_close'] = '<p>';
+        
+        
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
         $config['attributes'] = array('class' => 'page_link');
@@ -29,53 +34,63 @@
         $config['last_link'] = 'Last';
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
-        $config['prev_link'] = '&laquo';
+        $config['prev_link'] = '&lt;';
         $config['prev_tag_open'] = '<li class="prev">';
         $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = '&raquo';
+        $config['next_link'] = '&gt;';
         $config['next_tag_open'] = '<li>';
         $config['next_tag_close'] = '</li>';
         $config['last_tag_open'] = '<li>';
         $config['last_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><a href="#" class="page-link">';
+        $config['cur_tag_open'] = '<li class="page-item active"><a href="" class="page-link">';
         $config['cur_tag_close'] = '<span class="sr-only">(current)</span></a></li>';
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
 
-
-        $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
-      $this->pagination->initialize($config);
-        $data["links"] = $this->pagination->create_links();
-        $data['message'] = '';
-        $data['products'] = $this->Productmodel->all($config["per_page"], $page);
+        $search_text = "";
         
-        $data['records'] = $this->Productmodel->all($config['per_page'], $page);
+        $allcount = $this->Productmodel->get_count($search_text);
 
-        $key = $this->input->post('search');
+        $search_text = $this->input->get('searchKeyword');
 
+        $config['base_url'] = base_url().'index.php/user/Product/index?searchKeyword='.$search_text;
+        $config['first_url'] = $config['base_url'];
+         
+        $config['total_rows'] = $this->Productmodel->get_count($search_text);
+
+        if ($this->input->get('searchKeyword')) $config['suffix'] = '&' . http_build_query($_GET, '', "&");
+
+        $config['per_page'] = 3;
+        $config['use_page_numbers'] = TRUE;
+        
+
+        $this->pagination->initialize($config);
+
+        $data["pagination"] = $this->pagination->create_links();
+
+
+        if($this->input->get('per_page') && $this->input->get('per_page')!='1' ){
+            $page = (($this->input->get('per_page') * $config['per_page']) - $config['per_page']) ;
+         }
+         else{
+            $page = '0';
+         }
+         // echo ($page); die();
+         $data['products'] = $this->Productmodel->all($config["per_page"], $page, $search_text);
+
+        
+      if($this->input->get('submitSearch') != NULL )
+      {
+      $search_text = $this->input->get('searchKeyword');
+      }
+ 
+        $data['searchKeyword'] = $search_text;
 
          $this->load->view('user/prolist',$data);
-     }
-
-     public function searchUser() 
-     {
-        
-        $key = $this->input->post('search');
-
-        if(isset($key) and !empty($key)){
-            $data['search'] = $this->Productmodel->searchRecord($key);
-            $data['link'] = '';
-            $data['message'] = 'Search Results';
-            $data["links"] = $this->pagination->create_links();
-            $this->load->view('user/prolist', $data);
-        }
-        else {
-            redirect('user/Product') ;
-        }
     }
+  
 
 
-      
       public function getSubcategory() 
       {
         $json = array();
@@ -84,6 +99,7 @@
         header('Content-Type: application/json');
         echo json_encode($json);
       }
+
 
       function create()
       {
@@ -109,6 +125,7 @@
            redirect(base_url().'user/Product');
          }  
        }
+
    
        function edit($productsId)
      {
@@ -137,6 +154,7 @@
          redirect(base_url().'user/Product');
         }    
      }
+
    
      function delete($productsId)
      {

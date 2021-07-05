@@ -11,6 +11,9 @@
 <?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
 <!-- Custom styles for this template-->
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
+<?php echo link_tag('assests/css/sb-admin.css'); ?>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
   </head>
 
@@ -73,6 +76,21 @@
       ?>
     </div>
   </div>
+
+          <form method="get" action="Category/index">
+                <div class="form-group">
+                    <input type="text" name="searchKeyword" class="form-control" placeholder="Search by Category Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
+                    <div class="input-group-append">
+                        <input type="submit" name="submitSearch" class="btn btn-primary submit" value="Search">
+                        
+
+                        <a href="<?php echo base_url(). "user/Category"; ?>" class="btn btn-primary">Refresh</a>
+
+
+                    </div>
+                </div>
+            </form>
+
   <div class="row">
     <div class="col-md-8">
       <div class="row">
@@ -140,6 +158,10 @@
       <?php } ?>
 
       </table>
+
+
+      <p><?php echo $pagination; ?></p> 
+
     </div>
   </div>  
 </div>
