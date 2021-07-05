@@ -12,21 +12,21 @@
 <!-- Custom styles for this template-->
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
 
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
+
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-
-
-  </head>
+</head>
 
   <body id="page-top">
 
    <?php include APPPATH.'views/user/includes/header.php';?>
 
+
     <div id="wrapper">
 
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -78,6 +78,10 @@
       ?>
     </div>
   </div>
+
+
+
+
   <div class="row">
     <div class="col-md-8">
       <div class="row">

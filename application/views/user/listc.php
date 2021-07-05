@@ -14,7 +14,6 @@
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-
   </head>
 
   <body id="page-top">
@@ -77,7 +76,17 @@
     </div>
   </div>
 
-          <form method="get" action="Category/index">
+
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <!-- <div class="card-header">
+                <h3 class="card-title">Bordered Table</h3>
+              </div> -->
+
+              <form method="get" action="Category/index">
                 <div class="form-group">
                     <input type="text" name="searchKeyword" class="form-control" placeholder="Search by Category Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
                     <div class="input-group-append">
@@ -85,32 +94,18 @@
                         
 
                         <a href="<?php echo base_url(). "user/Category"; ?>" class="btn btn-primary">Refresh</a>
-
-
                     </div>
                 </div>
             </form>
 
-  <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6 text-right">
-          <a href="<?php echo base_url().'user/Category/create';?>" class="btn btn-primary">Add New Category</a>
-        </div>
-      </div>
-      <hr>
-    </div>
-  </div>
-
-  
-  <div class="row">
-    <div class="col-md-8">
-      <table class="table table-striped">
-        <tr>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
           <th>Name</th>
           <th>Status</th>
-
+          <th width="60">ADD</th>
           <th width="60">Edit</th>
           <th width="100">Delete</th>
         </tr>
@@ -142,6 +137,10 @@
 
           </td>
           <td>
+            <a href="<?php echo base_url().'user/Category/create';?>" class="btn btn-primary">Add</a>
+          </td>
+
+          <td>
             <a href="<?php echo base_url().'user/Category/edit/'.$categories['id']?>" class="btn btn-primary">Edit</a>
           </td>
 
@@ -165,6 +164,8 @@
     </div>
   </div>  
 </div>
+
+                    
 
 <script>
 

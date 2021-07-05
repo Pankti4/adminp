@@ -1,3 +1,4 @@
+
       <ul class="sidebar navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="<?php echo site_url('user/Dashboard'); ?>">
@@ -16,11 +17,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Change Password</span></a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url('user/Dropdowns'); ?>">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Location</span></a>
-        </li> -->
+      
 
         <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url('user/Country'); ?>">
@@ -64,11 +61,6 @@
             <span>Product Image</span></a>
         </li> 
 
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo site_url('user/Manage_gallery'); ?>">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Images</span></a>
-        </li>
 
     <li class="nav-item">
           <a class="nav-link" href="<?php echo site_url('user/Login/logout'); ?>">
