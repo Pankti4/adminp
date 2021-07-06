@@ -3,15 +3,16 @@
 
 <head>
 <title>Category</title>
-<!-- Bootstrap core CSS-->
+ <!-- <link rel="stylesheet" href="<?php echo base_url('assests/css/bootstrap.min.css'); ?>"/> -->
+
 <?php echo link_tag('assests/vendor/bootstrap/css/bootstrap.min.css'); ?>
-<!-- Custom fonts for this template-->
+
 <?php echo link_tag('assests/vendor/fontawesome-free/css/all.min.css'); ?>
-<!-- Page level plugin CSS-->
+
 <?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
-<!-- Custom styles for this template-->
+
 <?php echo link_tag('assests/css/sb-admin.css'); ?>
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
+
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   </head>
@@ -27,7 +28,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
 
-      <div id="content-wrapper">
+      <div id="content-wrapper" >
 
         <div class="container-fluid">
 
@@ -93,7 +94,7 @@
                         <input type="submit" name="submitSearch" class="btn btn-primary submit" value="Search">
                         
 
-                        <a href="<?php echo base_url(). "user/Category"; ?>" class="btn btn-primary">Refresh</a>
+                        <a href="<?php echo base_url(). 'user/Category'; ?>" class="btn btn-primary">Refresh</a>
                     </div>
                 </div>
             </form>
