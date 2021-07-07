@@ -1,48 +1,61 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+
 <title><?= $this->config->item('site_name') ?></title>
 
-<link rel="stylesheet" href="<?= base_url('assests/vendor/fontawesome-free/css/all.min.css') ?>">
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-<link rel="stylesheet" href="<?= base_url('assests/vendor/datatables-bs4/jquery.dataTables.min.css') ?>">
+<!-- Font Awesome -->
+  <link rel="stylesheet" href="<?= base_url('assests/css/fontawesome-free/css/all.min.css')?>">
 
-<!-- GET http://localhost/adminp/assets/vendor/datatables-bs4/jquery.dataTables.min.css net::ERR_ABORTED 404 (Not Found) -->
+<!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-<link rel="stylesheet" href="<?= base_url('assests/vendor/datatables-bs4/dataTables.bootstrap4.min.css') ?>">
+<!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="<?= base_url('assests/css/tempusdominus-bootstrap-4.min.css')?>">
 
-<link rel="stylesheet" href="<?= base_url('assests/vendor/Chart.js/Chart.min.css') ?>">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?= base_url('assests/css/icheck-bootstrap/icheck-bootstrap.min.css')?>">
 
-<link rel="stylesheet" href="<?= base_url('assets/vendor/overlayScrollbars/OverlayScrollbars.min.css') ?>">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?= base_url('assests/css/jqvmap/jqvmap.min.css')?>">
 
-<link rel="stylesheet" href="<?= base_url('assets/vendor/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') ?>">
+<!-- Theme style -->
+<link rel="stylesheet" href="<?= base_url('assests/css/adminlte.min.css') ?>">
 
-<link rel="stylesheet" href="<?= base_url('assets/css/adminlte.min.css') ?>">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
 
-   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
 
-      <a class="navbar-brand mr-1" href="index.html">Product Details</a>
+   <!-- <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="<?php echo base_url('assests/images/AdminLTELogo.png');?>" alt="AdminLTELogo" height="60" width="60">
+  </div> -->
 
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
-
+   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <ul class="navbar-nav">
-
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+        <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
 
+   
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
@@ -148,6 +161,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </a>
       </li>
     </ul>
-
-
-    </nav>
+  </nav>

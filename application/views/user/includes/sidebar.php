@@ -1,4 +1,11 @@
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+<!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="<?= base_url('assests/images/AdminLTELogo.png')?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -12,7 +19,9 @@
         </div>
       </div>
 
-      <!-- <div class="form-inline"> -->
+
+      <!-- SidebarSearch Form -->
+       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
@@ -21,9 +30,12 @@
             </button>
           </div>
         </div>
+      </div>
 
-
-      <ul class="sidebar navbar-nav">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <!-- <ul class="sidebar navbar-nav"> -->
         <li class="nav-item active">
           <a class="nav-link" href="<?php echo site_url('user/Dashboard'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>

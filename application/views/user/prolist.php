@@ -1,28 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>Products</title>
-<!-- Bootstrap core CSS-->
-<?php echo link_tag('assests/vendor/bootstrap/css/bootstrap.min.css'); ?>
-<!-- Custom fonts for this template-->
-<?php echo link_tag('assests/vendor/fontawesome-free/css/all.min.css'); ?>
-<!-- Page level plugin CSS-->
-<?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
-<!-- Custom styles for this template-->
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
-
-
-  </head>
-
-  <body id="page-top">
 
    <?php include APPPATH.'views/user/includes/header.php';?>
 
-    <div id="wrapper">
+  
 
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
