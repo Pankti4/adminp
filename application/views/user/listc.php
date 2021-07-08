@@ -30,7 +30,7 @@
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                  <div class="card card-success">
+                  <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Category Table</h3>
               </div>
@@ -52,23 +52,19 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Category Table</h3>
-                
+                <div class="col-12 text-right">
+          <a href="<?php echo base_url().'user/Category/create';?>" class="btn btn-primary">Add New Category</a>
+        </div>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
                 <table class="table table-bordered">
                   <thead>
-
-                  
-
-
                     <tr>
                         <th style="width: 10px">Name</th>
                         <th>Status</th>
-                        <th width="60">ADD</th>
-                        <th width="60">Edit</th>
-                       <th style="width: 40px">Delete</th>
+                        <th style="width: 200px">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -99,18 +95,11 @@
                                 ?>
 
                       </td>
-                      <td>
-                        <a href="<?php echo base_url().'user/Category/create';?>" class="btn btn-primary">Add</a>
-                      </td>
 
                       <td>
                         <a href="<?php echo base_url().'user/Category/edit/'.$categories['id']?>" class="btn btn-primary">Edit</a>
-                      </td>
-
-                      <td>
                         <a href="<?php echo base_url().'user/Category/delete/'.$categories['id']?>" class="btn btn-danger remove">Delete</a>
                       </td>
-
                     </tr>
                         <?php } } else { ?>
 
@@ -118,48 +107,6 @@
                       <td colspan="5">Categories not Found</td>
                     </tr>
                   <?php } ?>
-
-
-                    <!-- <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        <ki/div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr> -->
                   </tbody>
                 </table>
 
@@ -175,25 +122,44 @@
             <!-- /.card -->
             </section>
             </div>
-<script>
+
+<script type="text/javascript">
     $(".remove").click(function(){
         var id = $(this).parents("tr").attr("id");
-        if(confirm('Are you sure to remove this State ?'))
-        {
-            $.ajax({
-               url: 'user/Category/delete/'+id,
-               type: 'DELETE',
-               error: function() {
-                  alert('Something is wrong');
-               },
-               success: function(data) {
-                    $("#"+id).remove();
-                    alert(" removed successfully");  
-               }
-            });
+    
+       swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '/user/Category/delete/'+id,
+             type: 'DELETE',
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  $("user/listc"+id).remove();
+                  swal("Deleted!", "Your Data has been deleted.", "success");
+             }
+          });
+        } else {
+          swal("Cancelled", "Your Data is safe :)", "error");
         }
+      });
+     
     });
+    
 </script>
+
 
 <?php include APPPATH.'views/user/includes/footer.php';?>
 <!-- Scroll to Top Button-->

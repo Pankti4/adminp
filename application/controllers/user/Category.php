@@ -140,12 +140,14 @@ public function __construct()
     $categories = $this->Categorymodel->getCategories($categoriesId);
     if(empty($categories))
     {
-      $this->session->set_flashdata('failure','Category not found in database!');
+     $this->session->set_flashdata('failure','Category not found in database!');
       redirect(base_url().'user/Category');  
     }
     $this->Categorymodel->deleteCategories($categoriesId);
-    $this->session->set_flashdata('success','Category deleted successfully');
+     $this->session->set_flashdata('success','Category deleted successfully');
       redirect(base_url().'user/Category');
+      echo 'Deleted successfully.';
+
   }
 }
 ?>

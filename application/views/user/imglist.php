@@ -1,45 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>ProductImage</title>
-<!-- Bootstrap core CSS-->
-<?php echo link_tag('assests/vendor/bootstrap/css/bootstrap.min.css'); ?>
-<!-- Custom fonts for this template-->
-<?php echo link_tag('assests/vendor/fontawesome-free/css/all.min.css'); ?>
-<!-- Page level plugin CSS-->
-<?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
-<!-- Custom styles for this template-->
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
-
-  </head>
-
-  <body id="page-top">
-
    <?php include APPPATH.'views/user/includes/header.php';?>
-
-    <div id="wrapper">
-
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-
       <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Category</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Dashboard'); ?>">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">ProductImage</li>
-          </ol>
-
-      <div class="container" style="padding-top: 10px;">
-        
-</div>
+            <li class="breadcrumb-item active">Product</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
 <div class="row">
 
@@ -78,11 +58,15 @@
     </div>
   </div>
 
+
+<section class="content">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6 text-right">
+    <div class="col-md-12">
+      <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Product Table</h3>
+              </div>
           <?php
                 // if (isset($error)){
                 //     echo $error;
@@ -94,20 +78,25 @@
       </div>
       <hr>
     </div>
-  </div>         
-         
-  <div class="row">
-    <div class="col-md-8">
-      <table class="table table-striped">
-        <tr>
-          <th>Product Name</th>
-          <th>Image Name</th>
-          <!-- <th>Status</th> -->
+  </div>  
+  </section>   
 
-          <!-- <th width="60">Edit</th> -->
-          <th width="100">Delete</th>
-        </tr>
-        <!-- print_r($img); --><?php  if(!empty($img)) { $data = $img; $data = $data[0]; ?>
+  <div class="col-md-12">
+  <div class="card">
+   <div class="card-header">
+    <h3 class="card-title">Product Table</h3>
+      <div class="col-12 text-right">
+        <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Image Name</th>
+                        <th style="width: 200px">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php  if(!empty($img)) { $data = $img; $data = $data[0]; ?>
         <?php  foreach($img as $img1) { ?>
         <tr>
           <td><?php echo $data->name; ?></td>
@@ -115,20 +104,22 @@
           <td>
             <a href="<?php echo base_url().'user/Productimage/delete/'.$data->id; ?>" class="btn btn-danger remove">Delete</a>
           </td>
-
-        </tr>
+           </tr>
       <?php } } else { ?>
 
         <tr>
           <td colspan="5">Productimage not Found</td>
         </tr>
       <?php } ?>
-
-      </table>
-    </div>
-  </div>  
-</div>
-
+      </tbody>
+                </table>
+              </div>
+              <div class="card-footer clearfix">
+        </div>
+            <!-- /.card -->
+          </div>
+            </section>
+            </div>
 <script>
 
 
@@ -170,18 +161,8 @@
 
 </script>
 
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-     <?php include APPPATH.'views/user/includes/footer.php';?>
-
-      </div>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
+<?php include APPPATH.'views/user/includes/footer.php';?>
+<!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>

@@ -1,246 +1,173 @@
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-  
+<?php include APPPATH.'views/user/includes/header.php';?>
 
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
 
-      <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Category</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Dashboard'); ?>">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Products</li>
-          </ol>
-
-<div class="row">
-
-    <div class="col-lg-12 margin-tb">
-
-        <div class="pull-left">
+            <li class="breadcrumb-item active">Product</li>
+            </ol>
+          </div>
         </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-    </div>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                  <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Product Table</h3>
+              </div>
+              <div class="card-body">
+                  <form method="get" action="Product/index">
+                  <div class="col-md-3">
+                    <input type="text" name="searchKeyword" class="form-control" placeholder="Search by SubCategory Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
+                  </div>
+                  <div class="col-md-6">
+                        <input type="submit" name="submitSearch" class="btn btn-primary submit " value="Search">
+                        <a href="<?php echo base_url(). 'user/Product'; ?>" class="btn btn-primary ">Refresh</a>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            </div>
 
-</div>
-
-
-<div class="container" style="padding-top: 10px;"> 
-  <div class="row">
-    <div class="col-md-12">
-      <?php
-      $success = $this->session->userdata('success');
-      if($success != "")
-      {
-      ?>
-      <div class="alert alert-success"><?php echo $success;?></div>
-      <?php 
-      }
-      ?>
-
-      <?php
-      $failure = $this->session->userdata('failure');
-      if($failure != "")
-      {
-      ?>
-      <div class="alert alert-danger"><?php echo $failure;?></div>
-      <?php 
-      }
-      ?>
-    </div>
-  </div>
-
-          <form method="get" action="Product/index">
-                <div class="form-group">
-                    <input type="text" name="searchKeyword" class="form-control" placeholder="Search by Product Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
-                    <div class="input-group-append">
-                        <input type="submit" name="submitSearch" class="btn btn-primary submit" value="Search">
-                        
-
-                        <a href="<?php echo base_url(). "index.php/user/Product"; ?>" class="btn btn-primary">Refresh</a>
-
-
-                    </div>
-                </div>
-            </form>
-
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6 text-right">
-          <a href="<?php echo base_url().'user/Product/create';?>" class="btn btn-primary">Add New Products</a>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Product Table</h3>
+                <div class="col-12 text-right">
+          <a href="<?php echo base_url().'user/Product/create';?>" class="btn btn-primary">Add New Product</a>
         </div>
-      </div>
-      <hr>
-    </div>
-  </div>
+              </div>
 
-  
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table" id="datatable">
-                    <thead>
-      <!-- <table class="table table-striped"> -->
-        <tr>
-          <th>Category Name</th>
-          <th>SubCategory Name</th>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Subctaegory Name</th>
+                        <th>Product Name</th>
+                        <th>Status</th>
+                        <th width="60">Image</th>
+                        <th style="width: 200px">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <?php if(!empty($products)) { foreach($products as $pr) { ?>
+                    <td><?php echo $pr['catname']?></td>
+                    <td><?php echo $pr['subcatname']?></td>
+                    <td><?php echo $pr['name'];?></td>
+                    <td>
+                      <?php 
+                              if($pr['status']==1)
+                              {
+                                ?>
 
-          <th>Name</th>
-          <th>Status</th>
+                                <div class="label label-success">
+                                  <strong>Active</strong>
+                                </div>
 
-          <th width="60">Image</th>
-          <th width="60">Edit</th>
-          <th width="100">Delete</th>
-        </tr>
+                                <?php
+                               }
+                                elseif ($pr['status']==0){
+                                ?>
 
-        
-        <?php 
+                                <div class="label label-danger">
+                                  <strong>InActive</strong>
+                                </div>
 
-          if(!empty($products)) 
-          { 
-            foreach($products as $pr) 
-            { 
-               
-           if($pr['status'] == 1) { $status = 'Active'; } else { $status = 'InActive';}
-          ?>
-        <tr>
-          <td><?php echo $pr['catname'];?></td>
-          <td><?php echo $pr['subcatname'];?></td>
-          <td><?php echo $pr['name'];?></td>
-          <td><strong><?php echo $status; ?></strong></td>
-          <td>
-            <a href="<?php echo base_url().'user/Productimage/create/'.$pr['id']?>" class="btn btn-primary">Image</a>
-          </td>
+                                <?php
+                                }
+                                ?>
+                    </td>
+                    <td>
+                    <a href="<?php echo base_url().'user/Productimage/create/'.$pr['id']?>" class="btn btn-primary">Image</a>
+                    </td>
+                      <td>
+                        <a href="<?php echo base_url().'user/Product/edit/'.$pr['id']?>" class="btn btn-primary">Edit</a>
+                        <a href="<?php echo base_url().'user/Product/delete/'.$pr['id']?>" class="btn btn-danger remove">Delete</a>
+                      </td>
+                    </tr>
+                        <?php } } else { ?>
 
-          <td>
-            <a href="<?php echo base_url().'user/Product/edit/'.$pr['id']?>" class="btn btn-primary">Edit</a>
-          </td>
+                    <tr>
+                      <td colspan="5">Product not Found</td>
+                    </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
 
-          <td>
-            <a href="<?php echo base_url().'user/Product/delete/'.$pr['id']?>" class="btn btn-danger remove">Delete</a>
-          </td>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <!-- <ul class="pagination pagination-sm m-0 float-right"> -->
+                  <p><?php echo $pagination; ?></p>
+                <!-- </ul> -->
+              </div>
 
-        </tr>
-      <?php } } else { ?>
+            </div>
+            <!-- /.card -->
+            </section>
+            </div>
 
-        <tr>
-          <td colspan="5">Products not Found</td>
-        </tr>
-      <?php } ?>
-                            </thead>
-                      <tbody>
-                      </tbody>
-
-      </table>
-
-      
-      <p><?php echo $pagination; ?></p> 
-
-    </div>
-  </div>  
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
-
-  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script>
-$(document).ready(function(){
-
- load_data();
-
- function load_data(query)
- {
-  $.ajax({
-   url:"<?php echo base_url(); ?>Product/fetch",
-   method:"POST",
-   data:{query:query},
-   success:function(data){
-    $('#result').html(data);
-   }
-  })
- }
-
- $('#search_text').keyup(function(){
-  var search = $(this).val();
-  if(search != '')
-  {
-   load_data(search);
-  }
-  else
-  {
-   load_data();
-  }
- });
-});
-</script>
-
-
-
-<script>
+<script type="text/javascript">
     $(".remove").click(function(){
-
         var id = $(this).parents("tr").attr("id");
-
-
-        if(confirm('Are you sure to remove this Product ?'))
-
-        {
-
-            $.ajax({
-
-               url: 'Product/delete/'+id,
-
-               type: 'DELETE',
-
-               error: function() {
-
-                  alert('Something is wrong');
-
-               },
-
-               success: function(data) {
-
-                    $("#"+id).remove();
-
-                    alert(" removed successfully");  
-
-               }
-
-            });
-
+    
+       swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '/user/Category/delete/'+id,
+             type: 'DELETE',
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  $("user/listc"+id).remove();
+                  swal("Deleted!", "Your Data has been deleted.", "success");
+             }
+          });
+        } else {
+          swal("Cancelled", "Your Data is safe :)", "error");
         }
-
+      });
+     
     });
-
-
+    
 </script>
 
-        <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-     <?php include APPPATH.'views/user/includes/footer.php';?>
-
-      </div>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
+<?php include APPPATH.'views/user/includes/footer.php';?>
+<!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
@@ -253,7 +180,5 @@ $(document).ready(function(){
     <script src="<?php echo base_url('assests/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
     <!-- Custom scripts for all pages-->
     <script src="<?php echo base_url('assests/js/sb-admin.min.js '); ?>"></script>
-
-  </body>
-
+</body>
 </html>
