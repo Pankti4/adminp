@@ -1,226 +1,170 @@
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-    <!-- <div id="wrapper"> -->
+<?php include APPPATH.'views/user/includes/header.php';?>
 
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
 
-      <!-- <div id="content-wrapper"> -->
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Category</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Dashboard'); ?>">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">City</li>
-          </ol>
-
-<div class="row">
-
-    <div class="col-lg-12 margin-tb">
-
-        <div class="pull-left">
+            </ol>
+          </div>
         </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
-    </div>
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                  <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">City Table</h3>
+              </div>
+              <div class="card-body">
+                  <form method="get" action="City/index">
+                  <div class="col-md-3">
+                    <input type="text" name="searchKeyword" class="form-control" placeholder="Search by City Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
+                  </div>
+                  <div class="col-md-6">
+                        <input type="submit" name="submitSearch" class="btn btn-primary submit " value="Search">
+                        <a href="<?php echo base_url(). 'user/City'; ?>" class="btn btn-primary ">Refresh</a>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            </div>
 
-</div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">City Table</h3>
+                <div class="col-12 text-right">
+                <a href="<?php echo base_url().'user/City/create';?>" class="btn btn-primary">Add New City</a>
+          </div>
+              </div>
 
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <th>Country Name</th>
+                        <th>State Name</th>
+                        <th>City Name</th>
+                        <th>Status</th>
+                        <th style="width: 200px">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                     <?php if(!empty($cities)) { foreach($cities as $ct) { ?>
+                    <td><?php echo $ct['cname']?></td>
+                    <td><?php echo $ct['sname']?></td>
+                    <td><?php echo $ct['name'];?></td>
+                    <td>
+                      <?php 
+                              if($ct['status']==1)
+                              {
+                                ?>
 
-<div class="container" style="padding-top: 10px;"> 
-  <div class="row">
-    <div class="col-md-12">
-      <?php
-      $success = $this->session->userdata('success');
-      if($success != "")
-      {
-      ?>
-      <div class="alert alert-success"><?php echo $success;?></div>
-      <?php 
-      }
-      ?>
+                                <div class="label label-success">
+                                  <strong>Active</strong>
+                                </div>
 
-      <?php
-      $failure = $this->session->userdata('failure');
-      if($failure != "")
-      {
-      ?>
-      <div class="alert alert-danger"><?php echo $failure;?></div>
-      <?php 
-      }
-      ?>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6 text-right">
-          <a href="<?php echo base_url().'user/City/create';?>" class="btn btn-primary">Add New City</a>
-        </div>
-      </div>
-      <hr>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-striped">
-        <tr>
-          <th>Country Name</th>
-          <th>State Name</th>
-          <th>City Name</th>
-          <th>Status</th>
-          <th width="60">Edit</th>
-          <th width="100">Delete</th>
-        </tr>
+                                <?php
+                               }
+                                elseif ($ct['status']==0){
+                                ?>
 
-        <?php  if(!empty($city)) { foreach($city as $ct) { 
-          if($ct->status == 1) { $status = 'Active'; } else { $status = 'InActive';} ?>
-        <tr>
-          <td><?php echo $ct->countryname; ?></td>
-          <td><?php echo $ct->statename; ?></td>
-          <td><?php echo $ct->name; ?></td>
-          <td><strong><?php echo $status; ?></strong></td>
-          <td>
-            <a href="<?php echo base_url().'user/City/edit/'.$ct->id ?>" class="btn btn-primary">Edit</a>
-          </td>
+                                <div class="label label-danger">
+                                  <strong>InActive</strong>
+                                </div>
 
-          <td>
-            <a href="<?php echo base_url().'user/City/delete/'.$ct->id ?>" class="btn btn-danger remove">Delete</a>
-          </td>
+                                <?php
+                                }
+                                ?>
+                    </td>
+            
+                      <td>
+                        <a href="<?php echo base_url().'user/City/edit/'.$ct['id']?>" class="btn btn-primary">Edit</a>
+                        <a href="<?php echo base_url().'user/City/delete/'.$ct['id']?>" class="btn btn-danger remove">Delete</a>
+                      </td>
+                    </tr>
+                        <?php } } else { ?>
 
-        </tr>
-      <?php } } else { ?>
+                    <tr>
+                      <td colspan="5">City not Found</td>
+                    </tr>
+                  <?php } ?>
+                  </tbody>
+                </table>
 
-        <tr>
-          <td colspan="5">Cities not Found</td>
-        </tr>
-      <?php } ?>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <!-- <ul class="pagination pagination-sm m-0 float-right"> -->
+                  <p><?php echo $pagination; ?></p>
+                <!-- </ul> -->
+              </div>
 
-      </table>
-    </div>
-  </div>  
-</div>
-
+            </div>
+            <!-- /.card -->
+            </section>
+            </div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-    /* Populate data to state dropdown */
-    $('#country').on('change',function(){
-        var countryID = $(this).val();
-        if(countryID){
-            $.ajax({
-                type:'POST',
-                url:'<?php echo base_url('user/dropdowns/getStates'); ?>',
-                data:'country_id='+countryID,
-                success:function(data){
-                    $('#state').html('<option value="">Select State</option>'); 
-                    var dataObj = jQuery.parseJSON(data);
-                    if(dataObj){
-                        $(dataObj).each(function(){
-                            var option = $('<option />');
-                            option.attr('value', this.id).text(this.name);           
-                            $('#state').append(option);
-                        });
-                    }else{
-                        $('#state').html('<option value="">State not available</option>');
-                    }
-                }
-            }); 
-        }else{
-            $('#state').html('<option value="">Select country first</option>');
-            $('#city').html('<option value="">Select state first</option>'); 
+    $(".remove").click(function(){
+        var id = $(this).parents("tr").attr("id");
+    
+       swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+             url: '/user/City/delete/'+id,
+             type: 'DELETE',
+             error: function() {
+                alert('Something is wrong');
+             },
+             success: function(data) {
+                  $("user/cilist"+id).remove();
+                  swal("Deleted!", "Your Data has been deleted.", "success");
+             }
+          });
+        } else {
+          swal("Cancelled", "Your Data is safe :)", "error");
         }
+      });
+     
     });
     
-    /* Populate data to city dropdown */
-    $('#state').on('change',function(){
-        var stateID = $(this).val();
-        if(stateID){
-            $.ajax({
-                type:'POST',
-                url:'<?php echo base_url('user/dropdowns/getCities'); ?>',
-                data:'state_id='+stateID,
-                success:function(data){
-                    $('#city').html('<option value="">Select City</option>'); 
-                    var dataObj = jQuery.parseJSON(data);
-                    if(dataObj){
-                        $(dataObj).each(function(){
-                            var option = $('<option />');
-                            option.attr('value', this.id).text(this.name);           
-                            $('#city').append(option);
-                        });
-                    }else{
-                        $('#city').html('<option value="">City not available</option>');
-                    }
-                }
-            }); 
-        }else{
-            $('#city').html('<option value="">Select state first</option>'); 
-        }
-    });
-});
 </script>
 
 
-<script>
-
-
-    $(".remove").click(function(){
-
-        var id = $(this).parents("tr").attr("id");
-
-
-        if(confirm('Are you sure to remove this State ?'))
-
-        {
-
-            $.ajax({
-
-               url: 'City/delete/'+id,
-
-               type: 'DELETE',
-
-               error: function() {
-
-                  alert('Something is wrong');
-
-               },
-
-               success: function(data) {
-
-                    $("#"+id).remove();
-
-                    alert(" removed successfully");  
-
-               }
-
-            });
-
-        }
-
-    });
-
-
-</script>
-
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-     <?php include APPPATH.'views/user/includes/footer.php';?>
-
-      </div>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
+<?php include APPPATH.'views/user/includes/footer.php';?>
+<!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
     </a>
@@ -233,7 +177,5 @@ $(document).ready(function(){
     <script src="<?php echo base_url('assests/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
     <!-- Custom scripts for all pages-->
     <script src="<?php echo base_url('assests/js/sb-admin.min.js '); ?>"></script>
-
-  </body>
-
+</body>
 </html>

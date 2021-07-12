@@ -1,79 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>ProductImage</title>
-<!-- Bootstrap core CSS-->
-<?php echo link_tag('assests/vendor/bootstrap/css/bootstrap.min.css'); ?>
-<!-- Custom fonts for this template-->
-<?php echo link_tag('assests/vendor/fontawesome-free/css/all.min.css'); ?>
-<!-- Page level plugin CSS-->
-<?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
-<!-- Custom styles for this template-->
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
-
-  </head>
-
-  <body id="page-top">
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-    <div id="wrapper">
+<?php include APPPATH.'views/user/includes/header.php';?>
 
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-      <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Dashboard'); ?>">Dashboard</a>
             </li>
-
             <li class="breadcrumb-item">
-              <a href="<?php echo site_url('user/Productimage'); ?>">ProductIamge</a>
+              <a href="<?php echo site_url('user/Productimage'); ?>">Product Image</a>
             </li>
-            <li class="breadcrumb-item active">Product</li>
-          </ol>
-          <?php //echo APPPATH; ?>
-  <div class="container" style="padding-top: 10px;">
+            <li class="breadcrumb-item active">Add Product Image</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
     
-           <!-- Page Content -->
-          <form method="post" id="formid" name="createImg" action="<?php echo base_url().'user/Productimage/create/'.$pid.'';?>" enctype="multipart/form-data">
+            <!-- /.card -->
+            <!-- Horizontal Form -->
+            <section class="content">
+              <div class="container-fluid">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Add New Product Image</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+               <form method="post" id="formid" name="createImg" action="<?php echo base_url().'user/Productimage/create/'.$pid.'';?>" enctype="multipart/form-data">
 
-            <div class="row">
+                <div class="card-body">
+                  <table class="table table-bordered">
+                    <label for="inputName3" class="col-sm-2 col-form-label">Image Name</label>
+                    <div class="col-md-4">
+                      <input type="file" name="imagename[]" class="form-control" multiple>
+                     <?php echo form_error('imagename');?>
+                    </div>
+                  </div>
 
-              
-              
-        <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="inputName3" class="col-sm-2 col-form-label">Upload Image</label>
+                    <div class="col-md-4">
+                     <input type='submit' name='submit' value='upload'>
+                    </div>
+                  </div>
+                      
+                </div>
 
-            <div class="form-group">
-
-                <strong>Image Name:</strong>
-
-                <input type="file" name="imagename[]" class="form-control" multiple>
-                <?php echo form_error('imagename');?>
-
-            </div>
-
-        </div>
-
-        
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <input type='submit' name='submit' value='upload'>
-
-                <!-- <a class="btn btn-primary" href="<?php echo base_url('user/Productimage');?>"> Back</a> -->
-
-        </div>
-
-</form>
-</div>
-<?php  
+                <?php  
  
 if(!empty($product))
 {
@@ -118,28 +99,57 @@ if(!empty($product))
     </div>
   </div> 
 <?php } else { echo 'No Recoed Found';} ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+
+
+
+                <!-- /.card-body -->
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
+          </section>
+      </div>
+ <script type="text/javascript">
+           jQuery(document).on('change', 'select#category', function (e) {
+                e.preventDefault();
+                var category = jQuery(this).val();
+                getSubcatList(category);
+            });
+            
+            function getSubcatList(category) {
+            $.ajax({
+                url: '<?php echo base_url('user/Product/getSubcategory'); ?>',
+                type: 'post',
+                data: {category: category},
+                dataType: 'json',
+                success: function (json) {
+                    var options = '';
+                    options +='<option value="">Select Sub Category</option>';
+                    for (var i = 0; i < json.length; i++) {
+                        options += '<option value="' + json[i].subcat_id + '">' + json[i].subcat_name + '</option>';
+                    }
+                    jQuery("select#sub_category").html(options);
+         
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }   
+                
+         </script>
+
+
+      <script>
 
   $(document).ready(function(){
-
-    // $("#formid").validate({
-    //     rules: {
-    //         product: "required",
-    //         imagename: "required",
-    //         // contact_no: "required",
-    //     },
-    //     messages: {
-    //         product: "Choose any product",
-    //         imagename: "Upload Image first",
-    //         // contact_no: "Please Enter Contact No",            
-    //     }
-    // });
  
-            $('#products').change(function(){ 
+            $('#categories').change(function(){ 
                 var id=$(this).val();
                 $.ajax({
-                    url : "<?php echo site_url('productimage/get_product');?>",
+                    url : "<?php echo site_url('subcategory/get_categories');?>",
                     method : "POST",
                     data : {id: id},
                     async : true,
@@ -149,9 +159,9 @@ if(!empty($product))
                         var html = '';
                         var i;
                         for(i=0; i<data.length; i++){
-                            html += '<option value='+data[i].product_id+'>'+data[i].product_name+'</option>';
+                            html += '<option value='+data[i].category_id+'>'+data[i].category_name+'</option>';
                         }
-                        $('#products').html(html);
+                        $('#categories').html(html);
  
                     }
                 });
@@ -160,31 +170,4 @@ if(!empty($product))
              
         });
 </script>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-     <?php include APPPATH.'views/user/includes/footer.php';?>
-
-      </div>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url('assests/vendor/jquery/jquery.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assests/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url('assests/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url('assests/js/sb-admin.min.js '); ?>"></script>
-
-  </body>
-
-</html>
+ <?php include APPPATH.'views/user/includes/footer.php';?>

@@ -134,6 +134,14 @@ public function __construct()
      }    
   }
 
+  // public function delete($categoriesId)
+  //  {
+  //      $this->db->delete('categories', array('id' => $id));
+  //      echo 'Deleted successfully.';
+  //  }
+
+
+
   function delete($categoriesId)
   {
     $this->load->model('Categorymodel');

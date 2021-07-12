@@ -38,9 +38,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
     <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
-
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

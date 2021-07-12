@@ -40,6 +40,7 @@
                   <div class="form-group row">
                     <label for="inputName3" class="col-sm-2 col-form-label">Category Name</label>
                     <div class="col-md-4">
+                      
                       <select class="form-control" name="category" id="category" required>
                         <option value="">Select Category</option>
                         <?php foreach($category as $row):?>

@@ -1,102 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>Country</title>
-<!-- Bootstrap core CSS-->
-<?php echo link_tag('assests/vendor/bootstrap/css/bootstrap.min.css'); ?>
-<!-- Custom fonts for this template-->
-<?php echo link_tag('assests/vendor/fontawesome-free/css/all.min.css'); ?>
-<!-- Page level plugin CSS-->
-<?php echo link_tag('assests/vendor/datatables/dataTables.bootstrap4.css'); ?>
-<!-- Custom styles for this template-->
-<?php echo link_tag('assests/css/sb-admin.css'); ?>
-
-  </head>
-
-  <body id="page-top">
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-    <div id="wrapper">
-
+<?php include APPPATH.'views/user/includes/header.php';?>
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
-      <div id="content-wrapper">
-
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>General Form</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Dashboard'); ?>">Dashboard</a>
             </li>
-
             <li class="breadcrumb-item">
               <a href="<?php echo site_url('user/Country'); ?>">Country</a>
             </li>
             <li class="breadcrumb-item active">Edit Country</li>
-          </ol>
-
-          <!-- Page Content -->
-
-<div class="container" style="padding-top: 10px;">
-  
-  <hr>
-  <form method="post" name="editCountries" action="<?php echo base_url().'user/Country/edit/'.$countries['id'];?>">
-  <div class="row">
-    
-    <div class="col-md-6">
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="name" value="<?php echo set_value('name',$countries['name']);?>" class="form-control">
-        <?php echo form_error('name');?>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-2 control-label">Status</label>
-        <div class="col-md-4">
-          <select name="status" class="form-control">
-            <option value="1">Active</option>
-            <option value="0">InActive</option>
-          </select>
+            </ol>
+          </div>
         </div>
-        <!-- <label>Status</label>
-        <label class="radio-inline"><input type="radio" name="status" checked>Active</label>
-                <label class="radio-inline"><input type="radio" name="status">InActive</label>
-        <?php echo form_error('status');?> -->
+      </div><!-- /.container-fluid -->
+    </section>
+    
+            <!-- /.card -->
+            <!-- Horizontal Form -->
+            <section class="content">
+              <div class="container-fluid">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Edit Country</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="post" name="editCountries" action="<?php echo base_url().'user/Country/edit/'.$countries['id'];?>">
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label for="inputName3" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-md-4">
+                      <input type="text" name="name" value="<?php echo set_value('name',$countries['name']);?>" class="form-control">
+                    <?php echo form_error('name');?>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputStatus3" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-md-4">
+                       <select name="status" class="form-control">
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                      </select> 
+                    </div>
+                  </div>
+                  
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info">Update</button>
+                  <a class="btn btn-info float-right" href="<?php echo base_url('user/Country');?>"> Cancel</a>
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
+        </section>
       </div>
 
-      <div class="form-group">
-        <button class="btn btn-primary">Update</button>
-        <a href="<?php echo base_url().'user/Country';?>" class="btn-secondary btn">Cancel</a>
-      </div>
-    </div> 
-  </div>
-  </form>
-</div>
-
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-     <?php include APPPATH.'views/user/includes/footer.php';?>
-
-      </div>
-      <!-- /.content-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
-
-
-    <!-- Bootstrap core JavaScript-->
+          <?php include APPPATH.'views/user/includes/footer.php';?>
+  <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('assests/vendor/jquery/jquery.min.js'); ?>"></script>
     <script src="<?php echo base_url('assests/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
     <!-- Core plugin JavaScript-->
