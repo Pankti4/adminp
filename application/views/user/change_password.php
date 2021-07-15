@@ -1,29 +1,40 @@
-
-<!-- <title>User Change Password</title> -->
-
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-    <!-- <div id="wrapper"> -->
-
+<?php include APPPATH.'views/user/includes/header.php';?>
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 
-      <div id="content-wrapper">
 
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="<?php echo site_url('user/Dashboard'); ?>">User</a>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Category</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+              <a href="<?php echo site_url('user/Dashboard'); ?>">user</a>
             </li>
             <li class="breadcrumb-item active">Change Password</li>
-          </ol>
+            </ol>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                  <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Change Password</h3>
+              </div>
+              <div class="card-body">
           <!-- Page Content -->
-          <h1>Change Password</h1>
+          <!-- <h1>Change Password</h1> -->
           <hr>
 <!---- Success Message ---->
 <?php if ($this->session->flashdata('success')) { ?>
@@ -78,10 +89,15 @@
       <div class="form-group">         
    <div class="form-row">             
                 <div class="col-md-6">
- <?php echo form_submit(['name'=>'chnagepwd','value'=>'Change','class'=>'btn btn-primary btn-block']); ?>
+ <?php echo form_submit(['name'=>'chnagepwd','value'=>'Change','class'=>'btn btn-info btn-block']); ?>
 </div>
 </div>
 </div>
+
+</div>
+</section>
+</div>
+
  <?php echo form_close();?>
 
         </div>

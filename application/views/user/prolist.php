@@ -34,6 +34,7 @@
                 <h3 class="card-title">Product Table</h3>
               </div>
               <div class="card-body">
+
                   <form method="get" action="Product/index">
                   <div class="col-md-3">
                     <input type="text" name="searchKeyword" class="form-control" placeholder="Search by SubCategory Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
@@ -59,6 +60,22 @@
 
               <!-- /.card-header -->
               <div class="card-body">
+
+                <?php if ($this->session->flashdata('success')) { ?>
+                  <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
+                    </div>
+
+
+                  <?php } ?>
+
+                <!---- Error Message ---->
+
+                  <?php if ($this->session->flashdata('error')) { ?>
+                      <p style="color:red; font-size:18px;"><?php echo $this->session->flashdata('error');?></p>
+
+                <?php } ?>
+
+
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -128,7 +145,40 @@
             </section>
             </div>
 
-<script type="text/javascript">
+ <script type="text/javascript">
+
+    $(".remove").click(function(){
+        var id = $(this).parents("tr").attr("id");
+        if(confirm('Are you sure to remove this Product ?'))
+        {
+          $.ajax({
+               url: '/user/Product/'+id,
+               type: 'DELETE',
+               error: function() 
+               {
+                  alert('removed successfully');
+
+               },
+
+               success: function(data) 
+               {
+                    $("#"+id).remove();
+
+                    alert(" removed successfully");  
+               }
+
+            });
+
+        }
+
+    });
+
+
+</script>
+
+
+
+<!-- <script type="text/javascript">
     $(".remove").click(function(){
         var id = $(this).parents("tr").attr("id");
     
@@ -163,7 +213,7 @@
      
     });
     
-</script>
+</script> -->
 
 
 <?php include APPPATH.'views/user/includes/footer.php';?>

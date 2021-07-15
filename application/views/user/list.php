@@ -35,6 +35,7 @@
                 <h3 class="card-title">Country Table</h3>
               </div>
               <div class="card-body">
+
                   <form method="get" action="Country/index">
                   <div class="col-md-3">
                     <input type="text" name="searchKeyword" class="form-control" placeholder="Search by Country Name" value="<?php echo $this->input->get('searchKeyword'); ?>">
@@ -48,6 +49,7 @@
               <!-- /.card-body -->
             </div>
             </div>
+            
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
@@ -59,10 +61,24 @@
 
               <!-- /.card-header -->
               <div class="card-body">
+
+                <?php if ($this->session->flashdata('success')) { ?>
+                  <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
+                    </div>
+
+
+                  <?php } ?>
+
+                <!---- Error Message ---->
+
+                  <?php if ($this->session->flashdata('error')) { ?>
+                      <p style="color:red; font-size:18px;"><?php echo $this->session->flashdata('error');?></p>
+
+                <?php } ?>
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                        <th style="width: 10px">Name</th>
+                        <th>Name</th>
                         <th>Status</th>
                         <th style="width: 200px">Action</th>
                     </tr>
@@ -124,7 +140,7 @@
 
 
 
-            <script type="text/javascript">
+ <script type="text/javascript">
 
     $(".remove").click(function(){
 
@@ -132,18 +148,17 @@
 
 
         if(confirm('Are you sure to remove this Country ?'))
-
         {
 
             $.ajax({
 
-               url: '/item-list/'+id,
+               url: '/user/Country/'+id,
 
                type: 'DELETE',
 
                error: function() {
 
-                  alert('Something is wrong');
+                  alert('removed successfully');
 
                },
 
@@ -164,7 +179,7 @@
 
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(".remove").click(function(){
         var id = $(this).parents("tr").attr("id");
     
@@ -199,7 +214,7 @@
      
     });
     
-</script>
+</script> -->
 
 
 <?php include APPPATH.'views/user/includes/footer.php';?>

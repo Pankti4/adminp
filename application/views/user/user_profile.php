@@ -1,25 +1,43 @@
-
-   <?php include APPPATH.'views/user/includes/header.php';?>
-
-
+<?php include APPPATH.'views/user/includes/header.php';?>
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
 
-      <div id="content-wrapper">
 
-        <div class="container-fluid">
-
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="<?php echo site_url('user/Dashboard'); ?>">User</a>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Category</h1> -->
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+              <a href="<?php echo site_url('user/Dashboard'); ?>">user</a>
             </li>
             <li class="breadcrumb-item active">My Profile</li>
-          </ol>
-
-          <!-- Page Content -->
-          <h1>My Profile</h1>
+            </ol>
+            </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    
+<section class="content">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                  <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">My Profile</h3>
+              </div>
+              <div class="card-body">
+                  
+                <!-- <h1>My Profile</h1> -->
           <hr>
+
+
 <!---- Success Message ---->
 <?php if ($this->session->flashdata('success')) { ?>
 <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
@@ -98,13 +116,20 @@
 
        <div class="form-row">
             <div class="col-md-6">  
- <?php echo form_submit(['name'=>'Update','value'=>'Update','class'=>'btn btn-primary btn-block']); ?>
+ <?php echo form_submit(['name'=>'Update','value'=>'Update','class'=>'btn btn-info btn-block']); ?>
 </div>
 </div>
 
+              </div>
+              <!-- /.card-body -->
+            </div>
+            </div>
+
+          <!-- Page Content -->
+  </div>
+ </section>
+ </div>         
  
-
-
  <?php echo form_close();?>
 
         </div>

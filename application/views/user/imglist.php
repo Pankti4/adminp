@@ -47,6 +47,21 @@
 
               <!-- /.card-header -->
               <div class="card-body">
+
+                <?php if ($this->session->flashdata('success')) { ?>
+                  <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
+                    </div>
+
+
+                  <?php } ?>
+
+                <!---- Error Message ---->
+
+                  <?php if ($this->session->flashdata('error')) { ?>
+                      <p style="color:red; font-size:18px;"><?php echo $this->session->flashdata('error');?></p>
+
+                <?php } ?>
+
                 <table class="table table-bordered">
                   <thead>
                     <tr>
@@ -86,7 +101,49 @@
             </section>
             </div>
 
-<script type="text/javascript">
+ <script type="text/javascript">
+
+    $(".remove").click(function(){
+        var id = $(this).parents("tr").attr("id");
+
+
+        if(confirm('Are you sure to remove this ProductImage ?'))
+
+        {
+
+            $.ajax({
+
+               url: '/user/Country/'+id,
+
+               type: 'DELETE',
+
+               error: function() {
+
+                  alert('removed successfully');
+
+               },
+
+               success: function(data) {
+
+                    $("#"+id).remove();
+
+                    alert(" removed successfully");  
+
+               }
+
+            });
+
+        }
+
+    });
+
+
+</script>
+
+
+
+
+<!-- <script type="text/javascript">
     $(".remove").click(function(){
         var id = $(this).parents("tr").attr("id");
     
@@ -121,7 +178,7 @@
      
     });
     
-</script>
+</script> -->
 
 
 <?php include APPPATH.'views/user/includes/footer.php';?>
