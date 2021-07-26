@@ -1,5 +1,4 @@
 <?php include APPPATH.'views/user/includes/header.php';?>
-
       <!-- Sidebar -->
   <?php include APPPATH.'views/user/includes/sidebar.php';?>
 

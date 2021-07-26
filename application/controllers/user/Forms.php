@@ -1,5 +1,4 @@
 <?php 
-
 class Forms extends CI_Controller 
 {
 	public function __construct()
@@ -34,14 +33,14 @@ class Forms extends CI_Controller
 				mail($to,$subject,$txt,$headers);
 				}
 			else{
-			$data['error']="
-Invalid Email ID !
-";
+			$data['error']="Invalid Email ID !";
 			}
 		
 	}
 	   $this->load->view('user/forgot_pass',@$data);	
    }
-	       
+
+
+	            
 }
 ?>

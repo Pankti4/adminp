@@ -1,4 +1,3 @@
-
    <?php include APPPATH.'views/user/includes/header.php';?>
 
 

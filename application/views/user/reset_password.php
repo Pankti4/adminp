@@ -13,37 +13,30 @@
 
     <div class="container">
       <div class="card card-login mx-auto mt-5">
-        <div class="card-header">Login</div>
+        <div class="card-header">Reset</div>
 
 
 <div class="col-lg-12 col-lg-offset-4">
-    <h2>Please login</h2>
-    <?php $fattr = array('class' => 'form-signin');
-         echo form_open(site_url().'user/main/login/', $fattr); ?>
+    <h2>Reset your password</h2>
+    <!-- <h5>Hello <span><?php echo $first_name; ?></span>, Please enter your password 2x below to reset</h5>      -->
+<?php 
+    $fattr = array('class' => 'form-signin');
+     echo form_open(site_url().'user/main/login'); ?>
+
     <div class="form-group">
-      <?php echo form_input(array(
-          'name'=>'email', 
-          'id'=> 'email', 
-          'placeholder'=>'Email', 
-          'class'=>'form-control', 
-          'value'=> set_value('email'))); ?>
-      <?php echo form_error('email') ?>
-    </div>
-    <div class="form-group">
-      <?php echo form_password(array(
-          'name'=>'password', 
-          'id'=> 'password', 
-          'placeholder'=>'Password', 
-          'class'=>'form-control', 
-          'value'=> set_value('password'))); ?>
+      <?php echo form_password(array('name'=>'password', 'id'=> 'password', 'placeholder'=>'Password', 'class'=>'form-control', 'value' => set_value('password'))); ?>
       <?php echo form_error('password') ?>
     </div>
-    <?php echo form_submit(array('value'=>'Let me in!', 'class'=>'btn btn-lg btn-primary btn-block')); ?>
+    <div class="form-group">
+      <?php echo form_password(array('name'=>'passconf', 'id'=> 'passconf', 'placeholder'=>'Confirm Password', 'class'=>'form-control', 'value'=> set_value('passconf'))); ?>
+      <?php echo form_error('passconf') ?>
+    </div>
+    <?php echo form_submit(array('value'=>'Reset Password', 'class'=>'btn btn-lg btn-primary btn-block')); ?>
     <?php echo form_close(); ?>
-    <p><a href="<?php echo site_url();?>user/main/register">Register</a></p>
-    <p><a href="<?php echo site_url();?>user/main/forgot">Forgot Password</a></p>
+   
 </div>
-         </div>
+
+</div>
         </div>
       </div>
     </div>
